@@ -30,7 +30,7 @@ clusterissuer:
     class: nginx
 
 mysql:
-  architecture: "replicaset"
+  architecture: "replication"
   auth:
     rootPassword: "12345678"
     database: "orders_management"
