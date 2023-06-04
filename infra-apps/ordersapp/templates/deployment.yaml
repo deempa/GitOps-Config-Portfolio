@@ -43,14 +43,14 @@ spec:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: DATABASE_NAME
-        resources:
-          requests:
-            memory: {{ .Values.resources.requests.memory }}
-            cpu: {{ .Values.resources.requests.cpu }}
-          limits:
-            memory: {{ .Values.resources.limits.memory }}
-            cpu: {{ .Values.resources.limits.cpu }}
-      volumes:
-        - name: {{ .Values.configvolume.name }}
-          configMap:
-            name: {{ .Values.configmap.name }}
+      #   resources:
+      #     requests:
+      #       memory: {{ .Values.resources.requests.memory }}
+      #       cpu: {{ .Values.resources.requests.cpu }}
+      #     limits:
+      #       memory: {{ .Values.resources.limits.memory }}
+      #       cpu: {{ .Values.resources.limits.cpu }}
+      # volumes:
+      #   - name: {{ .Values.configvolume.name }}
+      #     configMap:
+      #       name: {{ .Values.configmap.name }}
