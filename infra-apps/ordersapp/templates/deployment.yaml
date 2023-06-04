@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.appName }} 
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: {{ .Values.configvolume.name }}
+          mountPath: /app/.env.local
+          subPath: .env.local
+          readOnly: true
+        env:
+          - name: DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: DATABASE_USER
+          - name: DATABASE_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: DATABASE_PASS
+          - name: DATABASE_HOST
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: DATABASE_HOST
+          - name: DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: DATABASE_NAME
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+      volumes:
+        - name: {{ .Values.configvolume.name }}
+          configMap:
+            name: {{ .Values.configmap.name }}
