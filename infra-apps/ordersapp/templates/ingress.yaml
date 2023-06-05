@@ -6,7 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
     nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /static
   labels:
     name: {{ .Values.appName }}
 spec:
@@ -16,7 +16,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/static"
+        path: "/"
         backend:
           service:
             name: {{ .Values.appName }}
