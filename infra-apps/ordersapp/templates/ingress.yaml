@@ -16,7 +16,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/static"
         backend:
           service:
             name: {{ .Values.appName }}
