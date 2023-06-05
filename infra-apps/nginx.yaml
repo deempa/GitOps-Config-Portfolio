@@ -15,10 +15,9 @@ spec:
     targetRevision: 4.6.1
     helm:
       values: |
-        controller:
-          proxySetHeaders:
-            HTTP_X-Forwarded-Proto: "https"
-            HTTP_X-Forwarded-Port: "443"
+        server:
+          ingress:
+            https: true
   project: default
   syncPolicy:
     automated:
