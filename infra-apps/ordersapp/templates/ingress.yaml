@@ -5,8 +5,6 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
-    nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
   labels:
     name: {{ .Values.appName }}
 spec:
