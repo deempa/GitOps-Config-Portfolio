@@ -13,6 +13,12 @@ spec:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.6.1
+    helm:
+      values: |
+        controller:
+          proxySetHeaders:
+            HTTP_X-Forwarded-Proto: "https"
+            HTTP_X-Forwarded-Port: "443"
   project: default
   syncPolicy:
     automated:
