@@ -25,7 +25,7 @@ clusterissuer:
   ingress:
     class: nginx
 mysql:
-  architecture: replication
+  architecture: replication 
   auth:
     rootPassword: "12345678"
     database: "orders_management"
