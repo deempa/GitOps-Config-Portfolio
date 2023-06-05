@@ -1,11 +1,9 @@
 appName: ordersapp
 namespace: default
 replicaCount: 2
-
 image:
   name: 644435390668.dkr.ecr.eu-west-2.amazonaws.com/lior-portfolio
-  tag: 1.0.0
-
+  tag: 1.0.6
 ingress:
   enabled: true
   host: democrm-lior.ddns.net
@@ -13,7 +11,6 @@ ingress:
   tls:
     secret:
       name: example-tls
-
 secret:
   name: default-secrets
   data:
@@ -21,14 +18,12 @@ secret:
     DATABASE_PASS: "12345678"
     DATABASE_HOST: ordersapp-mysql-headless
     DATABASE_NAME: orders_management
-
 clusterissuer:
   name: letsencrypt-prod
   email: masrab11@gmail.com
   server: https://acme-v02.api.letsencrypt.org/directory
   ingress:
     class: nginx
-
 mysql:
   auth:
     rootPassword: "12345678"
