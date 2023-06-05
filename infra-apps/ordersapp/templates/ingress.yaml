@@ -16,7 +16,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/templates/"
+        path: "/templates"
         backend:
           service:
             name: {{ .Values.appName }}
