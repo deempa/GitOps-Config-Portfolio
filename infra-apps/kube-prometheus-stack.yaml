@@ -12,17 +12,7 @@ spec:
   source:
     chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 46.6.0
-    # helm:
-    #   values: |
-    #     master:
-    #       replicaCount: 1
-    #     data:
-    #       replicaCount: 1
-    #     coordinating:
-    #       replicaCount: 1
-    #     ingest:
-    #       replicaCount: 1
+    targetRevision: 46.5.0
   project: default
   syncPolicy:
     automated:
