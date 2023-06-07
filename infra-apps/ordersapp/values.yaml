@@ -11,13 +11,17 @@ ingress:
   tls:
     secret:
       name: example-tls
+# secret:
+#   name: default-secrets
+#   data:
+#     DATABASE_USER: root
+#     DATABASE_PASS: "12345678"
+#     DATABASE_HOST: ordersapp-mysql-primary-headless
+#     DATABASE_NAME: orders_management
+
 secret:
-  name: default-secrets
-  data:
-    DATABASE_USER: root
-    DATABASE_PASS: "12345678"
-    DATABASE_HOST: ordersapp-mysql-primary-headless
-    DATABASE_NAME: orders_management
+  name: external-secrets
+  
 clusterissuer:
   name: letsencrypt-prod
   email: masrab11@gmail.com
