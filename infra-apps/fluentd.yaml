@@ -29,7 +29,7 @@ spec:
                 @type null
               </match>
               @include filters.conf
-              @include fluentd-output.conf
+              @include output.conf
               @include sources.conf
               @include fluentd-inputs.conf
             fluentd-inputs.conf: |
