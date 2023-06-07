@@ -72,6 +72,10 @@ spec:
                     format /^(?<time>.+) (?<stream>stdout|stderr) [^ ]* (?<log>.*)$/
                     time_format %Y-%m-%dT%H:%M:%S.%N%:z
                   </pattern>
+                  <pattern>
+                    format /^(?<level>[A-Z]+):(?<module>[^:]+):(?<message>.+)$/
+                    time_format %Y-%m-%dT%H:%M:%S.%N%:z
+                  </pattern>
                 </parse>
               </source>
             filters.conf: |-
