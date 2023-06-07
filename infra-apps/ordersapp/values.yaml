@@ -3,7 +3,7 @@ namespace: default
 replicaCount: 2
 image:
   name: 644435390668.dkr.ecr.eu-west-2.amazonaws.com/lior-portfolio
-  tag: 3.0.12
+  tag: 3.0.13
 ingress:
   enabled: true
   host: democrm-lior.ddns.net
