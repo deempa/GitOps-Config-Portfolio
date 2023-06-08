@@ -5,9 +5,11 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
-    nginx.ingress.kubernetes.io/upstream-vhost: lior-porftolio-staticfiles
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: https
+    nginx.ingress.kubernetes.io/upstream-vhost: "lior-porftolio-staticfiles"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      proxy_ssl_name OBJECT-STORAGE-HOSTNAME;
+      proxy_ssl_server_name on;
   labels:
     name: {{ .Values.appName }}
 spec:
