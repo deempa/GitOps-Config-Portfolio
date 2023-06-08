@@ -6,7 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
     nginx.ingress.kubernetes.io/server-snippet: |
-      location ~* ^/static/.*\.(images) {
+      location /static/ {
           rewrite ^/(.*)$ https://lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com/$1 break;
           proxy_pass https://lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com$request_uri;
           proxy_set_header Host lior-porftolio-staticfiles;
