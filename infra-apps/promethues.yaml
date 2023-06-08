@@ -21,6 +21,8 @@ spec:
             serviceMonitorSelectorNilUsesHelmValues: false
   project: default
   syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
