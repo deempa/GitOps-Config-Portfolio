@@ -23,7 +23,7 @@ spec:
               job_name: 'my-flask-app'
               scrape_interval: 5s
               static_configs:
-              - targets: ['ordersapp:5000']
+              - targets: ['ordersapp:80']
         prometheusOperator:
            admissionWebhooks:
              failurePolicy: Ignore
