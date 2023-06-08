@@ -5,10 +5,11 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
-    nginx.ingress.kubernetes.io/rewrite-target: /static/
-    nginx.ingress.kubernetes.io/upstream-vhost: lior-porftolio-staticfiles.s3-website-eu-west-1.amazonaws.com
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location "/" {
+        proxy_pass http://s3.eu-west-2.amazonaws.com/lior-porftolio-staticfiles/;
+        proxy_set_header Host s3.eu-west-2.amazonaws.com;
+      }
   labels:
     name: {{ .Values.appName }}
 spec:
@@ -24,10 +25,6 @@ spec:
             name: {{ .Values.appName }}
             port: 
               number: 80
-      - backend:
-          serviceName: static-assets
-          servicePort: 80
-        path: /static/*
   tls:
   - hosts:
     - {{ .Values.ingress.host }}
