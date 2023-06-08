@@ -7,10 +7,10 @@ metadata:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
     nginx.ingress.kubernetes.io/rewrite-target: "/"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-    location ~* /(css|html) {
-        rewrite ^/(.*)$ https://lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com/$1 break;
-        proxy_pass https://lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com$request_uri;
-    }
+      location ~* /(css|html) {
+          rewrite ^/(.*)$ https://lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com/$1 break;
+          proxy_pass https://lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com$request_uri;
+      }
 
   labels:
     name: {{ .Values.appName }}
