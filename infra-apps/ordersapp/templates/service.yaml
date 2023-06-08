@@ -14,18 +14,18 @@ spec:
   - port: 80
     targetPort: 5000
 
----
+# ---
 
-kind: Service
-apiVersion: v1
-metadata:
-  name: static-assets
-  namespace: default
-spec:
-  type: ExternalName
-  externalName: "lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com"
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: static-assets
+#   namespace: default
+# spec:
+#   type: ExternalName
+#   externalName: "lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com"
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 80
