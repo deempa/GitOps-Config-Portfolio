@@ -14,18 +14,18 @@ spec:
   - port: 80
     targetPort: 5000
 
----
+# ---
 
-kind: Service
-apiVersion: v1
-metadata:
-  name: static-assets
-  namespace: default
-spec:
-  type: ExternalName
-  externalName: "<MY_S3_BUCKET_NAME>.s3-website-eu-west-1.amazonaws.com"
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: static-assets
+#   namespace: default
+# spec:
+#   type: ExternalName
+#   externalName: "<MY_S3_BUCKET_NAME>.s3-website-eu-west-1.amazonaws.com"
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 80
