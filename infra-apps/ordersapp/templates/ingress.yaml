@@ -5,11 +5,7 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
-    nginx.ingress.kubernetes.io/backend-protocol: http
-    nginx.ingress.kubernetes.io/upstream-vhost: "lior-porftolio-staticfiles"
-    nginx.ingress.kubernetes.io/server-snippet: |
-      proxy_ssl_name OBJECT-STORAGE-HOSTNAME;
-      proxy_ssl_server_name on;
+    nginx.ingress.kubernetes.io/rewrite-target: /lior-porftolio-staticfiles/$2
   labels:
     name: {{ .Values.appName }}
 spec:
@@ -26,7 +22,7 @@ spec:
             port: 
               number: 80
       - pathType: Prefix
-        path: / # <-- your routing logic
+        path: /(.*) # <-- your routing logic
         backend:
           service:
             name: static-assets
