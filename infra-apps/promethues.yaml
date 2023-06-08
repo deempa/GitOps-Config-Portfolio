@@ -19,6 +19,9 @@ spec:
           prometheusSpec:
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
+        prometheusOperator:
+           admissionWebhooks:
+             failurePolicy: Ignore
   project: default
   syncPolicy:
     syncOptions:
