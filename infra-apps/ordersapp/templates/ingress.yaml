@@ -5,14 +5,8 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
-    nginx.ingress.kubernetes.io/server-snippet: |
-      location "/" {
-        index index.html;
-        try_files $uri @app;
-        add_header X-From "local";
-        proxy_pass http://s3.eu-west-2.amazonaws.com/lior-porftolio-staticfiles/;
-        proxy_set_header Host s3.eu-central-1.amazonaws.com;
-      }
+    # nginx.ingress.kubernetes.io/add-base-url: "true"
+    # nginx.ingress.kubernetes.io/rewrite-target: /
   labels:
     name: {{ .Values.appName }}
 spec:
@@ -28,13 +22,13 @@ spec:
             name: {{ .Values.appName }}
             port: 
               number: 80
-      # - pathType: Prefix
-      #   path: /(.*) # <-- your routing logic
-      #   backend:
-      #     service:
-      #       name: static-assets
-      #       port:
-      #         number: 80 
+      - pathType: Prefix
+        path: /(.*) # <-- your routing logic
+        backend:
+          service:
+            name: static-assets
+            port:
+              number: 80 
   tls:
   - hosts:
     - {{ .Values.ingress.host }}

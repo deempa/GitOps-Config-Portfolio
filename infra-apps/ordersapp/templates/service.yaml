@@ -23,7 +23,7 @@ metadata:
   namespace: default
 spec:
   type: ExternalName
-  externalName: "lior-porftolio-staticfiles.s3-website-eu-west-2.amazonaws.com"
+  externalName: "lior-porftolio-staticfiles.s3.eu-west-2.amazonaws.com"
   ports:
     - name: http
       protocol: TCP
