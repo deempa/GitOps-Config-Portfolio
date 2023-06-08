@@ -7,8 +7,6 @@ metadata:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
     nginx.ingress.kubernetes.io/add-base-url: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/upstream-vhost: lior-porftolio-staticfiles
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
   labels:
     name: {{ .Values.appName }}
