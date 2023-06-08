@@ -24,7 +24,7 @@ spec:
             port: 
               number: 80
       - pathType: Prefix
-        path: /(.*) # <-- your routing logic
+        path: / # <-- your routing logic
         backend:
           service:
             name: static-assets
