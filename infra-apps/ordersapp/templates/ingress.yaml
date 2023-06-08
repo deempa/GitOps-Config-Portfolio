@@ -27,7 +27,7 @@ spec:
           service:
             name: static-assets
             port:
-              number: 80
+              number: 80 
           # serviceName: external # <-- your service name
           # servicePort: 80
   tls:
