@@ -5,6 +5,7 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
+    nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /lior-porftolio-staticfiles/$2
   labels:
     name: {{ .Values.appName }}
