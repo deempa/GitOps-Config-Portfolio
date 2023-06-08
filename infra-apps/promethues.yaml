@@ -20,7 +20,7 @@ spec:
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
             additionalScrapeConfigs:
-              -job_name: 'my-flask-app'
+              - job_name: 'my-flask-app'
                 scrape_interval: 5s
                 static_configs:
                 - targets: ['ordersapp:5000']
