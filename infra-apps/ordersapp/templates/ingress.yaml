@@ -5,8 +5,14 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer.name }}
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location "/" {
+        index index.html;
+        try_files $uri @app;
+        add_header X-From "local";
+        proxy_pass http://s3.eu-west-2.amazonaws.com/lior-porftolio-staticfiles/;
+        proxy_set_header Host s3.eu-central-1.amazonaws.com;
+      }
   labels:
     name: {{ .Values.appName }}
 spec:
