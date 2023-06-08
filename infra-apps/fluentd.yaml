@@ -74,6 +74,10 @@ spec:
                   </pattern>
                 </parse>
               </source>
+              <source>
+                type tcp
+                port 24224
+              </source>
             filters.conf: |-
               <match raw.kubernetes.**>
                 @id raw.kubernetes
