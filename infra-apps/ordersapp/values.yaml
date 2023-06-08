@@ -33,3 +33,5 @@ mysql:
     # rootPassword: "12345678"
     database: "orders_management"
     existingSecret: "mysql-secrets"
+  metrics:
+    enabled: true
