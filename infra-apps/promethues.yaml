@@ -20,10 +20,10 @@ spec:
             podMonitorSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
             additionalScrapeConfigs:
-              job_name: 'my-flask-app'
+              job_name: 'ordersapp'
               scrape_interval: 5s
               static_configs:
-              - targets: ['ordersapp:5000']
+                - targets: ['ordersapp:80']
         prometheusOperator:
            admissionWebhooks:
              failurePolicy: Ignore
