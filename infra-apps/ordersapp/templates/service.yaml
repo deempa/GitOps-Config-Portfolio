@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     prometheus.io/scrape: "true"
-    prometheus.io/port: "5000"
+    prometheus.io/port: "80"
 spec:
   {{ if .Values.ingress.enabled }}
   type: ClusterIP
