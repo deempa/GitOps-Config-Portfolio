@@ -6,19 +6,11 @@ image:
   tag: 3.0.41
 ingress:
   enabled: true
-  host: democrm-lior.ddns.net
+  host: nominomi.hopto.org
   className: nginx
   tls:
     secret:
       name: example-tls
-# secret:
-#   name: default-secrets
-#   data:
-#     DATABASE_USER: root
-#     DATABASE_PASS: "12345678"
-#     DATABASE_HOST: ordersapp-mysql-primary-headless
-#     DATABASE_NAME: orders_management
-
 secret:
   name: external-secrets
 clusterissuer:
