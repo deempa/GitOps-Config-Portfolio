@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.appName }}
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "80"
 spec:
   {{ if .Values.ingress.enabled }}
   type: ClusterIP
