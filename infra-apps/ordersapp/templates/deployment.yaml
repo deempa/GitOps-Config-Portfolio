@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.appName }}
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "5000"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
