@@ -28,9 +28,6 @@ spec:
               <match fluent.**>
                 @type null
               </match>
-              <match app.**>
-                type stdout
-              </match>
               @include filters.conf
               @include outputs.conf
               @include sources.conf
