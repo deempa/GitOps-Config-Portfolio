@@ -28,6 +28,9 @@ spec:
               <match fluent.**>
                 @type null
               </match>
+              <match app.**>
+                type stdout
+              </match>
               @include filters.conf
               @include outputs.conf
               @include sources.conf
@@ -151,6 +154,7 @@ spec:
                   overflow_action block
                 </buffer>
               </match>
+
               </label>
   project: default
   syncPolicy:
