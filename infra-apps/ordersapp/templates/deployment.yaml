@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.appName }}
   annotations:
     prometheus.io/scrape: "true"
-    prometheus.io/port: "5"
+    prometheus.io/port: "5000"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
