@@ -224,77 +224,138 @@
 
 
 
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: fluentd
+#   namespace: default
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: default
+#     server: 'https://kubernetes.default.svc'
+#   source:
+#     chart: fluentd
+#     repoURL: https://charts.bitnami.com/bitnami
+#     targetRevision: 5.8.2
+#     helm:
+#       values: |
+#         aggregator:
+#           configMap: "elasticsearch-output"
+#           extraEnvVars:
+#             - name: ELASTICSEARCH_HOST
+#               value: "elasticsearch.default.svc.cluster.local"
+#             - name: ELASTICSEARCH_PORT
+#               value: "9200"
+#         forwarder:
+#           configMapFiles:
+#             fluentd.conf: |
+#               # Ignore fluentd own events
+#               <match fluent.**>
+#                 @type null
+#               </match>
+
+#               @include 01_sources.conf
+#               @include 02_filters.conf
+#               @include 03_dispatch.conf
+#               @include 04_outputs.conf
+#             01_sources.conf: |-
+#               <source>
+#                 @type tail
+#                 read_from_head true
+#                 tag kubernetes.*
+#                 path /var/log/containers/*.log
+#                 pos_file /var/log/containers.log.pos
+#                 exclude_path ["/var/log/containers/fluent*"]
+#                 <parse>
+#                   @type multi_format
+#                       <pattern>
+#                         format regexp
+#                         expression /^(?<time>[^ ]*)(?<stream>[^ ]*)[^ ]*(?<log>.*)$/
+#                         time_format %Y-%m-%dT%H:%M:%S.%NZ
+#                       </pattern>
+#                   <pattern>
+#                     format json
+#                     key log
+#                   </pattern>
+#                 </parse>
+#               </source>
+#             02_filters.conf: |-
+#             03_dispatch.conf: |-
+#             04_outputs.conf: |-
+#               <match **>
+#                 @type elasticsearch
+#                 @log_level info
+#                 host elasticsearch-master-hl
+#                 port 9200
+#                 logstash_format true
+#                 scheme http
+#                 path ""
+#                 index_name kube-fluentd
+#               </match>
+
+#   project: default
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: fluentd
   namespace: default
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
     chart: fluentd
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 5.8.2
+    repoURL: https://fluent.github.io/helm-charts
+    targetRevision: 0.4.3
     helm:
       values: |
-        aggregator:
-          configMap: "elasticsearch-output"
-          extraEnvVars:
-            - name: ELASTICSEARCH_HOST
-              value: "elasticsearch.default.svc.cluster.local"
-            - name: ELASTICSEARCH_PORT
-              value: "9200"
-        forwarder:
-          configMapFiles:
-            fluentd.conf: |
-              # Ignore fluentd own events
-              <match fluent.**>
-                @type null
-              </match>
-
-              @include 01_sources.conf
-              @include 02_filters.conf
-              @include 03_dispatch.conf
-              @include 04_outputs.conf
-            01_sources.conf: |-
-              <source>
-                @type tail
-                read_from_head true
-                tag kubernetes.*
-                path /var/log/containers/*.log
-                pos_file /var/log/containers.log.pos
-                exclude_path ["/var/log/containers/fluent*"]
-                <parse>
-                  @type multi_format
-                      <pattern>
-                        format regexp
-                        expression /^(?<time>[^ ]*)(?<stream>[^ ]*)[^ ]*(?<log>.*)$/
-                        time_format %Y-%m-%dT%H:%M:%S.%NZ
-                      </pattern>
-                  <pattern>
-                    format json
-                    key log
-                  </pattern>
-                </parse>
-              </source>
-            02_filters.conf: |-
-            03_dispatch.conf: |-
-            04_outputs.conf: |-
-              <match **>
-                @type elasticsearch
-                @log_level info
-                host elasticsearch-master-hl
-                port 9200
-                logstash_format true
-                scheme http
-                path ""
-                index_name kube-fluentd
-              </match>
-
+        livenessProbe:
+        readinessProbe:
+        fileConfigs:
+          01_sources.conf: |-
+            <source>
+              @type tail
+              read_from_head true
+              tag kubernetes.*
+              path /var/log/containers/*.log
+              pos_file /var/log/containers.log.pos
+              exclude_path ["/var/log/containers/fluent*"]
+              <parse>
+                @type multi_format
+                    <pattern>
+                      format regexp
+                      expression /^(?<time>[^ ]*)(?<stream>[^ ]*)[^ ]*(?<log>.*)$/
+                      time_format %Y-%m-%dT%H:%M:%S.%NZ
+                    </pattern>
+                <pattern>
+                  format json
+                  key log
+                </pattern>
+              </parse>
+            </source>
+          02_filters.conf: |-
+          03_dispatch.conf: |-
+          04_outputs.conf: |-
+            <match **>
+              @type elasticsearch
+              @log_level info
+              host elasticsearch-master-hl
+              port 9200
+              logstash_format true
+              scheme http
+              path ""
+              index_name kube-fluentd
+            </match>
   project: default
   syncPolicy:
     automated:
