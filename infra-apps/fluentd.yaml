@@ -250,6 +250,16 @@ spec:
               value: "9200"
         forwarder:
           configMapFiles:
+            fluentd.conf: |
+              # Ignore fluentd own events
+              <match fluent.**>
+                @type null
+              </match>
+
+              @include 01_sources.conf
+              @include 02_filters.conf
+              @include 03_dispatch.conf
+              @include 04_outputs.conf
             01_sources.conf: |-
               <source>
                 @type tail
