@@ -19,6 +19,8 @@ spec:
           hosts: 
             - "elasticsearch.default.svc.cluster.local"
           port: 9200
+        savedObjects:
+          configMap: "ordersdashboard"
   project: default
   syncPolicy:
     automated:
