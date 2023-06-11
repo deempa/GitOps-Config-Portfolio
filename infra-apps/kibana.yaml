@@ -20,7 +20,7 @@ spec:
             - "elasticsearch.default.svc.cluster.local"
           port: 9200
         savedObjects:
-          configMap: "ordersdashboard"
+          configMap: "kibanadashboard"
   project: default
   syncPolicy:
     automated:
