@@ -7,7 +7,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: logging
+    namespace: default
     server: 'https://kubernetes.default.svc'
   source:
     chart: kibana
@@ -26,5 +26,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
