@@ -6,7 +6,7 @@ image:
   tag: 3.0.53
 ingress:
   enabled: true
-  host: nominomi.hopto.org
+  host: nomiapp.ddns.net
   className: nginx
   tls:
     secret:
