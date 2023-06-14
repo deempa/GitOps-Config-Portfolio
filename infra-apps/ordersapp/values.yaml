@@ -26,3 +26,5 @@ mysql:
     existingSecret: "mysql-secrets"
   metrics:
     enabled: true
+  secondary:
+    replicaCount: 2
