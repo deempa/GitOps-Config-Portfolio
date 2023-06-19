@@ -13,6 +13,8 @@ spec:
     path: ./infra-apps/configs
     repoURL: git@github.com:deempa/GitOps-Config-Portfolio.git
     targetRevision: HEAD
+    directory:
+      recurse: true
   project: default
   syncPolicy:
     automated:
