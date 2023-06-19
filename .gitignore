@@ -1,1 +1,1 @@
-./infra-apps/configs/secrets/mysql.yaml
+./infra-apps/configs/templates/secrets/mysql.yaml
